@@ -11,7 +11,9 @@ def file_contents():
 
 def file_stock_conversion(contents):
     item = contents.split(',')
-    return item[0], int(item[1]), int(item[2]), int(item[3])
+    item_2 = '{0:.2f}'.format(float(item[2]))
+    item_3 = '{0:.2f}'.format(float(item[3]))
+    return (item[0]), item[1], item_2, item_3, int(item[4])
 
 
 def load_inventory():
@@ -22,9 +24,10 @@ def load_inventory():
         if line:
             item = file_stock_conversion(line)
             inventory[item[0]] = {
-                'Rent Per Day': item[1],
-                'Replacement Value': item[2],
-                'In-Stock': item[3]
+                'Item': item[1],
+                'Rent Per Day': item[2],
+                'Replacement Value': item[3],
+                'In-Stock': item[4]
             }
 
     return inventory
@@ -33,9 +36,9 @@ def load_inventory():
 def print_inventory(inventory):
     for item, info in inventory.items():
         print(
-            "Item: {}\n\tRent Per Day: {}\n\tReplacement Value: {}\n\tIn-Stock: {}\n".
-            format(item, info['Rent Per Day'], info['Replacement Value'],
-                   info['In-Stock']))
+            "Item Number: {}\n\tItem: {}\n\tRent Per Day: {}\n\tReplacement Value: {}\n\tIn-Stock: {}\n".
+            format(item, info['Item'], info['Rent Per Day'],
+                   info['Replacement Value'], info['In-Stock']))
 
 
 def main():
@@ -56,8 +59,11 @@ def main():
                 elif option == '2':
                     print_inventory(inventory)
                     rent = input('What would you like to rent?\n>>> ')
+                    core.renting(rent, inventory)
                 elif option == '3':
                     exit()
+                elif option == '':
+                    break
                 else:
                     print('Invalid option!')
         elif user == '2':
