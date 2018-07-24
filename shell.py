@@ -4,6 +4,7 @@ from core import *
 
 def main():
     inventory = load_inventory()
+    transcations = load_transcations()
     user = ''
     while user != '3':
         user = input(
@@ -19,11 +20,17 @@ def main():
                 if option == '1':
                     print_inventory(inventory)
                     return_item = input('What are you returning?\n>>> ')
-                    returning(return_item, inventory)
+                    if inventory.get(return_item, False):
+                        returning(return_item, inventory)
+                    else:
+                        print('Sorry, we do not carry that.')
                 elif option == '2':
                     print_inventory(inventory)
                     rent_item = input('What would you like to rent?\n>>> ')
-                    renting(rent_item, inventory)
+                    if inventory.get(rent_item, False):
+                        renting(rent_item, inventory)
+                    else:
+                        print('Sorry, we do not carry that.')
                 elif option == '3':
                     print('receipt')
                 elif option == '4':
@@ -45,7 +52,7 @@ def main():
                         if employee_options == '1':
                             print_inventory(inventory)
                         elif employee_options == '2':
-                            print('transcations')
+                            print_transcations(transcations)
                         elif employee_options == '3':
                             print('revenue')
                         elif employee_options == '4':
