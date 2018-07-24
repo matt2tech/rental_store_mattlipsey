@@ -1,1 +1,2 @@
-customer's name, item, days, total
+customer's name,item,days,total
+Matt, Grill, 2, 10

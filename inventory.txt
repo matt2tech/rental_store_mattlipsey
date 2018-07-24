@@ -1,4 +1,4 @@
-item, rental rate, replacement value, stock
-Grill, 5, 300, 5
-Boat, 20, 3000, 3
-Flat Screen Television, 7.50, 500, 11
+item number, item, rental rate, replacement value, stock
+1,Grill,5,300,5
+2,Boat,20,3000,3
+3,Flat Screen Television,7.50,500,11

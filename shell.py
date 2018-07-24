@@ -12,6 +12,7 @@ def main():
         )
         if user == '1':
             name = input('What is the name of this order?\n>>> ')
+            total = 0
             option = ''
             while option != '4':
                 option = input(
@@ -29,10 +30,11 @@ def main():
                     rent_item = input('What would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
+                        total += inventory[rent_item]['Rental Rate'] * 1.07
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    print('receipt')
+                    print('Total: ${}'.format(total))
                 elif option == '4':
                     exit()
                 elif option == '':

@@ -24,7 +24,7 @@ def load_inventory():
             item = inventory_stock_conversion(line)
             inventory[item[0]] = {
                 'Item': item[1],
-                'Rent Per Day': item[2],
+                'Rental Rate': item[2],
                 'Replacement Value': item[3],
                 'In-Stock': item[4]
             }
@@ -35,8 +35,8 @@ def load_inventory():
 def print_inventory(inventory):
     for item, info in inventory.items():
         print(
-            "Item Number: {}\n\tItem: {}\n\tRent Per Day: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
-            format(item, info['Item'], info['Rent Per Day'],
+            "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
+            format(item, info['Item'], info['Rental Rate'],
                    info['Replacement Value'], info['In-Stock']))
 
 
@@ -44,7 +44,7 @@ def convert_to_string(inventory):
     strings = []
     for item_number, info in inventory.items():
         item = info['Item']
-        rent = info['Rent Per Day']
+        rent = info['Rental Rate']
         replace = info['Replacement Value']
         stock = info['In-Stock']
         string = '{},{},{},{},{}'.format(item_number, item, rent, replace,
