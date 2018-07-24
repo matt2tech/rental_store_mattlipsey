@@ -17,7 +17,9 @@ def main():
                     'Are you returning or renting?\n1 - Return\n2 - Rent\n3 - Quit\n>>> '
                 )
                 if option == '1':
+                    print_inventory(inventory)
                     returning = input('What are you returning?\n>>> ')
+                    core.returning(returning, inventory)
                 elif option == '2':
                     print_inventory(inventory)
                     rent = input('What would you like to rent?\n>>> ')
