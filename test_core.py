@@ -35,3 +35,61 @@ def test_returning():
     }
     returning('1', inv)
     assert inv['1']['In-Stock'] == 6
+
+
+def test_rental_fee():
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Flat Screen Television',
+            'Rental Rate': 7.50,
+            'Replacement Value': 500.00,
+            'In-Stock': 11
+        }
+    }
+
+    cart = ['1', '2']
+
+    total = rental_fee(cart, inv)
+
+    assert total == 26.75
+
+
+def test_replacement_fee():
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Flat Screen Television',
+            'Rental Rate': 7.50,
+            'Replacement Value': 500.00,
+            'In-Stock': 11
+        }
+    }
+
+    cart = ['1', '2']
+
+    total = replacement_fee(cart, inv)
+
+    assert total == 330
