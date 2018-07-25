@@ -2,9 +2,25 @@ from disk import *
 from core import *
 
 
+def total(cart, inventory):
+    rent_fee = rental_fee(cart, inventory)
+    replacement_cost = replacement_fee(cart, inventory)
+    for item in cart:
+        item_name = inventory[item]['Item']
+        rental_rate = '{0:.2f}'.format(
+            float(inventory[item]['Rental Rate']) * 1.07)
+        replacement = '{0:.2f}'.format(
+            float(inventory[item]['Replacement Value']) * .1)
+        print('Item: {}\n\tRental Rate: ${}\n\tReplacement Fee: ${}'.format(
+            item_name, rental_rate, replacement))
+    print('Total: ${}'.format('{0:.2f}'.format(
+        float(rent_fee + replacement_cost))))
+
+
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
+    cart = []
     user = ''
     while user != '3':
         user = input(
@@ -12,7 +28,8 @@ def main():
         )
         if user == '1':
             name = input('What is the name of this order?\n>>> ')
-            total = 0
+            rent_total = 0
+            replace_total = 0
             option = ''
             while option != '4':
                 option = input(
@@ -30,11 +47,11 @@ def main():
                     rent_item = input('What would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
-                        total += inventory[rent_item]['Rental Rate'] * 1.07
+                        cart.append[rent_item]
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    print('Total: ${}'.format(total))
+                    print('Here\'s')
                 elif option == '4':
                     exit()
                 elif option == '':
