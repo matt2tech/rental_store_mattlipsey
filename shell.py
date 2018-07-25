@@ -27,20 +27,22 @@ def print_inventory(inventory):
 
 
 def print_transcations(transcations):
-    for item, info in transcations.items():
-        print(
-            "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Fee: ${}".
-            format(item, info['Name'], info['Item'], info['Days Rented'],
-                   '{0:.2f}'.format(info['Rent Total']), '{0:.2f}'.format(
-                       info['Replacement Fee'])))
+    for transcation in transcations:
+        for item, info in transcation.items():
+            print(
+                "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Fee: ${}\n".
+                format(item, info['Name'], info['Item'], info['Days Rented'],
+                       '{0:.2f}'.format(info['Rent Total']), '{0:.2f}'.format(
+                           info['Replacement Fee'])))
 
 
 def revenue(transcations):
     revenue_total = 0
-    for item, info in transcations.items():
-        if item == 'Return':
-            revenue_total += info['Rent Total']
-    print('{0:.2f}'.format(revenue_total))
+    for transcation in transcations:
+        for item, info in transcation.items():
+            if item == 'Return':
+                revenue_total += info['Rent Total']
+    print('Revenue: ${0:.2f}'.format(revenue_total))
 
 
 def main():
