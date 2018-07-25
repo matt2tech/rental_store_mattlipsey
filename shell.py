@@ -17,6 +17,24 @@ def total(cart, inventory):
         float(rent_fee + replacement_cost))))
 
 
+def print_inventory(inventory):
+    for item, info in inventory.items():
+        print(
+            "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
+            format(item, info['Item'], '{0:.2f}'.format(
+                float(info['Rental Rate'])), '{0:.2f}'.format(
+                    float(info['Replacement Value'])), info['In-Stock']))
+
+
+def print_transcations(transcations):
+    for item, info in transcations.items():
+        print(
+            "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Fee: ${}".
+            format(item, info['Name'], info['Item'], info['Days Rented'],
+                   '{0:.2f}'.format(info['Rent Total']), '{0:.2f}'.format(
+                       info['Replacement Fee'])))
+
+
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
@@ -28,8 +46,6 @@ def main():
         )
         if user == '1':
             name = input('What is the name of this order?\n>>> ')
-            rent_total = 0
-            replace_total = 0
             option = ''
             while option != '4':
                 option = input(
@@ -47,11 +63,15 @@ def main():
                     rent_item = input('What would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
-                        cart.append[rent_item]
+                        cart.append(rent_item)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    print('Here\'s')
+                    print('Here\'s your receipt')
+                    print('-----------------------------')
+                    print(name)
+                    total(cart, inventory)
+                    exit()
                 elif option == '4':
                     exit()
                 elif option == '':
