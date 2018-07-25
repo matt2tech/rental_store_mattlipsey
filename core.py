@@ -23,9 +23,16 @@ def replacement_fee(cart, inventory):
     return round(total, 2)
 
 
-# def total(cart, inventory):
-# rent_fee = rental_fee(cart,inventory)
-# replacement_cost = replacement_fee(cart, inventory)
-# for item in cart:
-# print('Item: {}\n\tRental Rate: ${}\n\tReplacement Fee: ${}\n'.format([item]['Item'], '{0:.2f}'.format(float([item]['Rental Rate']) * 1.07), '{0:.2f}'.format(float([item]['Replacement Value']) * .1))
-# print('Total: ${}'.format('{0:.2f}'.format(float(rent_fee + replacement_cost)))
+def total(cart, inventory):
+    rent_fee = rental_fee(cart, inventory)
+    replacement_cost = replacement_fee(cart, inventory)
+    for item in cart:
+        item_name = inventory[item]['Item']
+        rental_rate = '{0:.2f}'.format(
+            float(inventory[item]['Rental Rate']) * 1.07)
+        replacement = '{0:.2f}'.format(
+            float(inventory[item]['Replacement Value']) * .1)
+        print('Item: {}\n\tRental Rate: ${}\n\tReplacement Fee: ${}'.format(
+            item_name, rental_rate, replacement))
+    print('Total: ${}'.format('{0:.2f}'.format(
+        float(rent_fee + replacement_cost))))
