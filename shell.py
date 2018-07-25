@@ -35,6 +35,14 @@ def print_transcations(transcations):
                        info['Replacement Fee'])))
 
 
+def revenue(transcations):
+    revenue_total = 0
+    for item, info in transcations.items():
+        if item == 'Return':
+            revenue_total += info['Rent Total']
+    print('{0:.2f}'.format(revenue_total))
+
+
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
@@ -93,7 +101,7 @@ def main():
                         elif employee_options == '2':
                             print_transcations(transcations)
                         elif employee_options == '3':
-                            print('revenue')
+                            revenue(transcations)
                         elif employee_options == '4':
                             print('Returning to previous menu...\n')
                         elif employee_options == '5':
