@@ -30,3 +30,49 @@ def test_total(output):
     total(cart, inv)
 
     assert output == 'Item: Grill\n\tRental Rate: $5.35\n\tReplacement Fee: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Fee: $300.00\nTotal: $356.75'
+
+
+@should_print
+def test_print_inventory(output):
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        }
+    }
+
+    print_inventory(inv)
+
+    assert output == '''Item Number: 1\n\tItem: Grill\n\tRental Rate: $5.00\n\tReplacement Value: $300.00\n\tIn-Stock: 5\n\nItem Number: 2\n\tItem: Boat\n\tRental Rate: $20.00\n\tReplacement Value: $3000.00\n\tIn-Stock: 3'''
+
+
+@should_print
+def test_print_transcations(output):
+    transcations = {
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 1,
+            'Rent Total': 5.35,
+            'Replacement Fee': 30.00
+        },
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 2,
+            'Rent Total': 10.70,
+            'Replacement Fee': 0.00
+        }
+    }
+
+    print_transcations(transcations)
+
+    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 1\n\tRent Total: $5.35\n\tReplacement Fee: $30.00\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Fee: $0.00'
