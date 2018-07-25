@@ -56,14 +56,15 @@ def test_print_inventory(output):
 
 @should_print
 def test_print_transcations(output):
-    transcations = {
+    transcations = [{
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
             'Days Rented': 1,
             'Rent Total': 5.35,
             'Replacement Fee': 30.00
-        },
+        }
+    }, {
         'Return': {
             'Name': 'Matt',
             'Item': 'Grill',
@@ -71,8 +72,82 @@ def test_print_transcations(output):
             'Rent Total': 10.70,
             'Replacement Fee': 0.00
         }
-    }
+    }]
 
     print_transcations(transcations)
 
-    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 1\n\tRent Total: $5.35\n\tReplacement Fee: $30.00\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Fee: $0.00'
+    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 1\n\tRent Total: $5.35\n\tReplacement Fee: $30.00\n\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Fee: $0.00\n'
+
+
+@should_print
+def test_revenue_example1(output):
+    transcations = [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 1,
+            'Rent Total': 5.35,
+            'Replacement Fee': 30.00
+        }
+    }, {
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 2,
+            'Rent Total': 10.70,
+            'Replacement Fee': 0.00
+        }
+    }, {
+        'Rent': {
+            'Name': 'Bob',
+            'Item': 'Grill',
+            'Days Rented': 1,
+            'Rent Total': 5.35,
+            'Replacement Fee': 30.00
+        }
+    }, {
+        'Return': {
+            'Name': 'Bob',
+            'Item': 'Grill',
+            'Days Rented': 2,
+            'Rent Total': 10.70,
+            'Replacement Fee': 0.00
+        }
+    }]
+
+    revenue(transcations)
+
+    assert output == 'Revenue: $21.40'
+
+
+@should_print
+def test_revenue_example2(output):
+    transcations = [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 1,
+            'Rent Total': 5.35,
+            'Replacement Fee': 30.00
+        }
+    }, {
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 2,
+            'Rent Total': 10.70,
+            'Replacement Fee': 0.00
+        }
+    }, {
+        'Rent': {
+            'Name': 'Bob',
+            'Item': 'Grill',
+            'Days Rented': 1,
+            'Rent Total': 5.35,
+            'Replacement Fee': 30.00
+        }
+    }]
+
+    revenue(transcations)
+
+    assert output == 'Revenue: $10.70'
