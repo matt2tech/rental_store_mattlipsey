@@ -1,2 +1,5 @@
-customer's name,item,days,total
-Matt, Grill, 2, 10
+customer's name,item,days,rent total,replacement fee
+Rent,Matt,Grill,1,5.35,30.00
+Return,Matt,Grill,2,10.70,0.00
+Rent,Bob,Grill,1,5.35,30.00
+Return,Bob,Grill,2,10.70,0.00

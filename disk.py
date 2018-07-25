@@ -1,5 +1,7 @@
 import core
 
+# Inventory file conversion
+
 
 def inventory_contents():
     with open('inventory.txt', 'r') as file:
@@ -30,16 +32,17 @@ def load_inventory():
     return inventory
 
 
-def convert_to_string(inventory):
+def inventory_to_string(inventory):
     strings = []
-    for item_number, info in inventory.items():
-        item = info['Item']
-        rent = info['Rental Rate']
-        replace = info['Replacement Value']
-        stock = info['In-Stock']
-        string = '{},{},{},{},{}'.format(item_number, item, rent, replace,
-                                         stock)
-        strings.append(string)
+    for dictionary in inventory:
+        for item, info in dictionary.items():
+            item = info['Item']
+            rental_rate = info['Rental Rate']
+            replace = info['Replacement Value']
+            stock = info['In-Stock']
+            string = '{},{},{},{},{}'.format(item_number, item, rental_rate,
+                                             replace, stock)
+            strings.append(string)
     strings.sort()
     inventory = '\n'.join(strings)
     return inventory
@@ -49,6 +52,9 @@ def update_stock(inventory):
     text = convert_to_string(inventory)
     with open('inventory.txt', 'w') as file:
         file.write(text)
+
+
+# History file conversion
 
 
 def transcations_contents():
@@ -65,17 +71,28 @@ def transcations_stock_conversion(contents):
 
 def load_transcations():
     contents = transcations_contents()
-    transcations = {}
+    transcations = []
     lines = contents.split('\n')
     for line in lines:
         if line:
             item = transcations_stock_conversion(line)
-            transcations[item[0]] = {
-                'Name': item[1],
-                'Item': item[2],
-                'Days Rented': item[3],
-                'Rent Total': float(item[4]),
-                'Replacement Fee': float(item[5])
-            }
+            transcations.append({
+                item[0]: {
+                    'Name': item[1],
+                    'Item': item[2],
+                    'Days Rented': item[3],
+                    'Rent Total': float(item[4]),
+                    'Replacement Fee': float(item[5])
+                }
+            })
 
     return transcations
+
+
+# def add_transcation(type, name, item, inventory):
+#     inventory.append({
+#         type: {
+#             'Name': name,
+#             'Item'
+#         }
+#     })

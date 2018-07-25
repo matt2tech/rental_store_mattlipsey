@@ -18,13 +18,12 @@ def total(cart, inventory):
 
 
 def print_inventory(inventory):
-    for inv in inventory:
-        for item, info in inv.items():
-            print(
-                "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
-                format(item, info['Item'], '{0:.2f}'.format(
-                    float(info['Rental Rate'])), '{0:.2f}'.format(
-                        float(info['Replacement Value'])), info['In-Stock']))
+    for item, info in inventory.items():
+        print(
+            "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
+            format(item, info['Item'], '{0:.2f}'.format(
+                float(info['Rental Rate'])), '{0:.2f}'.format(
+                    float(info['Replacement Value'])), info['In-Stock']))
 
 
 def print_transcations(transcations):
@@ -44,13 +43,6 @@ def revenue(transcations):
             if item == 'Return':
                 revenue_total += info['Rent Total']
     print('Revenue: ${0:.2f}'.format(revenue_total))
-
-
-def renting(item_number, inventory):
-    if inventory[item_number]['In-Stock'] < 1:
-        print('Out of stock.')
-    else:
-        inventory[item_number]['In-Stock'] -= 1
 
 
 def main():
