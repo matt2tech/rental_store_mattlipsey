@@ -18,12 +18,13 @@ def total(cart, inventory):
 
 
 def print_inventory(inventory):
-    for item, info in inventory.items():
-        print(
-            "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
-            format(item, info['Item'], '{0:.2f}'.format(
-                float(info['Rental Rate'])), '{0:.2f}'.format(
-                    float(info['Replacement Value'])), info['In-Stock']))
+    for inv in inventory:
+        for item, info in inv.items():
+            print(
+                "Item Number: {}\n\tItem: {}\n\tRental Rate: ${}\n\tReplacement Value: ${}\n\tIn-Stock: {}\n".
+                format(item, info['Item'], '{0:.2f}'.format(
+                    float(info['Rental Rate'])), '{0:.2f}'.format(
+                        float(info['Replacement Value'])), info['In-Stock']))
 
 
 def print_transcations(transcations):
@@ -45,6 +46,13 @@ def revenue(transcations):
     print('Revenue: ${0:.2f}'.format(revenue_total))
 
 
+def renting(item_number, inventory):
+    if inventory[item_number]['In-Stock'] < 1:
+        print('Out of stock.')
+    else:
+        inventory[item_number]['In-Stock'] -= 1
+
+
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
@@ -52,32 +60,32 @@ def main():
     user = ''
     while user != '3':
         user = input(
-            'Welcome to Matt\'s Rents.\nAre you a customer or an employee?\n1 - Customer\n2 - Employee\n3 - Quit\n>>> '
+            '\nWelcome to Matt\'s Rents.\nAre you a customer or an employee?\n1 - Customer\n2 - Employee\n3 - Quit\n>>> '
         )
         if user == '1':
-            name = input('What is the name of this order?\n>>> ')
+            name = input('\nWhat is the name of this order?\n>>> ')
             option = ''
             while option != '4':
                 option = input(
-                    'Are you returning or renting?\n1 - Return\n2 - Rent\n3 - Done\n4 - Quit\n>>> '
+                    '\nAre you returning or renting?\n1 - Return\n2 - Rent\n3 - Done\n4 - Quit\n>>> '
                 )
                 if option == '1':
                     print_inventory(inventory)
-                    return_item = input('What are you returning?\n>>> ')
+                    return_item = input('\nWhat are you returning?\n>>> ')
                     if inventory.get(return_item, False):
                         returning(return_item, inventory)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '2':
                     print_inventory(inventory)
-                    rent_item = input('What would you like to rent?\n>>> ')
+                    rent_item = input('\nWhat would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
                         cart.append(rent_item)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    print('Here\'s your receipt')
+                    print('\nHere\'s your receipt')
                     print('-----------------------------')
                     print(name)
                     total(cart, inventory)
@@ -96,7 +104,7 @@ def main():
                     employee_options = ''
                     while employee_options != '4':
                         employee_options = input(
-                            'What would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Return to User\'s Menu\n5 - Quit\n>>> '
+                            '\nWhat would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Quit\n>>> '
                         )
                         if employee_options == '1':
                             print_inventory(inventory)
@@ -105,8 +113,6 @@ def main():
                         elif employee_options == '3':
                             revenue(transcations)
                         elif employee_options == '4':
-                            print('Returning to previous menu...\n')
-                        elif employee_options == '5':
                             print('Leaving Matt\'s Rents...')
                             exit()
                         else:
