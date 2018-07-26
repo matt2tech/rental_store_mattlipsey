@@ -26,9 +26,8 @@ def replacement_deposit(cart, inventory):
 def return_fee(inv):
     total = 0
     for item, info in inv.items():
-        total += round(
-            (float(info['Rental Rate'])), 2) * float(info['Days Rented'])
-    return total
+        total += info['Rental Rate'] * info['Days Rented']
+    return round(total, 2)
 
 
 def deposit_return(inv):
@@ -41,10 +40,8 @@ def deposit_return(inv):
 def return_listing(return_item, inventory, days):
     return_dict = {}
     item_name = inventory[return_item]['Item']
-    rental_rate = '{0:.2f}'.format(
-        inventory[return_item]['Rental Rate'] * 1.07)
-    replacement = '{0:.2f}'.format(
-        inventory[return_item]['Replacement Value'] * .1)
+    rental_rate = round(inventory[return_item]['Rental Rate'] * 1.07, 2)
+    replacement = round(inventory[return_item]['Replacement Value'] * .1, 2)
     return_dict[item_name] = {
         'Days Rented': days,
         'Rental Rate': rental_rate,
