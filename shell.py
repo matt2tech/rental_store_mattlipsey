@@ -14,11 +14,11 @@ def rent_total(rent_cart, inventory):
         print(
             'Item: {}\n\tRental Rate: ${}\n\tReplacement Deposit: ${}'.format(
                 item_name, rental_rate, replacement))
-    print('Total: ${}'.format('{0:.2f}'.format(rent_fee + replacement_cost)))
+    print('Total: ${}\n'.format('{0:.2f}'.format(rent_fee + replacement_cost)))
 
 
 def return_total(return_dict):
-    print('\nReturn')
+    print('Return')
     for inv in return_dict:
         rent_fee = return_fee(inv)
         deposit = deposit_return(inv)
@@ -30,7 +30,7 @@ def return_total(return_dict):
             print(
                 'Item: {}\n\tDays Rented: {}\n\tRental Rate: ${}\n\tReplacement Deposited ${}'.
                 format(item_name, days, rental, replace))
-        print('Total: ${0:.2f}\nDeposit Return: ${1:.2f}'.format(
+        print('Total: ${0:.2f}\nDeposit Return: ${1:.2f}\n'.format(
             round(rent_fee, 2), round(deposit, 2)))
 
 
@@ -64,9 +64,9 @@ def revenue(transcations):
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
-    print(transcations)
     rent_cart = []
     return_dict = []
+    new_transcations = []
     user = ''
     while user != '3':
         user = input(
@@ -93,6 +93,8 @@ def main():
                                 return_dict.append(
                                     return_listing(return_item, inventory,
                                                    days))
+                                add_return(name, new_transcations, return_item,
+                                           inventory, days)
                                 break
                             else:
                                 print('Provide an appropriate number.')
@@ -104,6 +106,7 @@ def main():
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
                         rent_cart.append(rent_item)
+                        add_rent(name, new_transcations, rent_item, inventory)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
@@ -113,6 +116,7 @@ def main():
                     rent_total(rent_cart, inventory)
                     return_total(return_dict)
                     update_stock(inventory)
+                    update_history(new_transcations)
                     exit()
                 elif option == '4':
                     exit()
