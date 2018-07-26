@@ -112,6 +112,7 @@ def main():
                     print(name)
                     rent_total(rent_cart, inventory)
                     return_total(return_dict)
+                    update_stock(inventory)
                     exit()
                 elif option == '4':
                     exit()
