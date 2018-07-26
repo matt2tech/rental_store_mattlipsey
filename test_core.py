@@ -66,7 +66,7 @@ def test_rental_fee():
     assert total == 26.75
 
 
-def test_replacement_fee():
+def test_replacement_deposit():
     inv = {
         '1': {
             'Item': 'Grill',
@@ -90,6 +90,20 @@ def test_replacement_fee():
 
     cart = ['1', '2']
 
-    total = replacement_fee(cart, inv)
+    total = replacement_deposit(cart, inv)
 
     assert total == 330
+
+
+def test_return_fee():
+    inv = {
+        'Grill': {
+            'Days Rented': 3,
+            'Rental Rate': 5.35,
+            'Replacement Deposited': 30.00
+        }
+    }
+
+    total = return_fee(inv)
+
+    assert total == 16.05
