@@ -3,7 +3,7 @@ from bcca.test import should_print
 
 
 @should_print
-def test_total(output):
+def test_rent_total(output):
     inv = {
         '1': {
             'Item': 'Grill',
@@ -27,9 +27,9 @@ def test_total(output):
 
     cart = ['1', '2']
 
-    total(cart, inv)
+    rent_total(cart, inv)
 
-    assert output == 'Item: Grill\n\tRental Rate: $5.35\n\tReplacement Fee: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Fee: $300.00\nTotal: $356.75'
+    assert output == 'Rent\nItem: Grill\n\tRental Rate: $5.35\n\tReplacement Deposit: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Deposit: $300.00\nTotal: $356.75'
 
 
 @should_print
@@ -60,9 +60,9 @@ def test_print_transcations(output):
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
-            'Days Rented': 1,
+            'Days Rented': 0,
             'Rent Total': 5.35,
-            'Replacement Fee': 30.00
+            'Replacement Deposit': 30.00
         }
     }, {
         'Return': {
@@ -70,13 +70,13 @@ def test_print_transcations(output):
             'Item': 'Grill',
             'Days Rented': 2,
             'Rent Total': 10.70,
-            'Replacement Fee': 0.00
+            'Replacement Deposit': 0.00
         }
     }]
 
     print_transcations(transcations)
 
-    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 1\n\tRent Total: $5.35\n\tReplacement Fee: $30.00\n\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Fee: $0.00\n'
+    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 0\n\tRent Total: $5.35\n\tReplacement Deposit: $30.00\n\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Deposit: $0.00\n'
 
 
 @should_print
@@ -85,9 +85,9 @@ def test_revenue_example1(output):
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
-            'Days Rented': 1,
+            'Days Rented': 0,
             'Rent Total': 5.35,
-            'Replacement Fee': 30.00
+            'Replacement Deposit': 30.00
         }
     }, {
         'Return': {
@@ -95,15 +95,15 @@ def test_revenue_example1(output):
             'Item': 'Grill',
             'Days Rented': 2,
             'Rent Total': 10.70,
-            'Replacement Fee': 0.00
+            'Replacement Deposit': 0.00
         }
     }, {
         'Rent': {
             'Name': 'Bob',
             'Item': 'Grill',
-            'Days Rented': 1,
+            'Days Rented': 0,
             'Rent Total': 5.35,
-            'Replacement Fee': 30.00
+            'Replacement Deposit': 30.00
         }
     }, {
         'Return': {
@@ -111,13 +111,13 @@ def test_revenue_example1(output):
             'Item': 'Grill',
             'Days Rented': 2,
             'Rent Total': 10.70,
-            'Replacement Fee': 0.00
+            'Replacement Deposit': 0.00
         }
     }]
 
     revenue(transcations)
 
-    assert output == 'Revenue: $21.40'
+    assert output == 'Revenue: $32.10'
 
 
 @should_print
@@ -126,9 +126,9 @@ def test_revenue_example2(output):
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
-            'Days Rented': 1,
+            'Days Rented': 0,
             'Rent Total': 5.35,
-            'Replacement Fee': 30.00
+            'Replacement Deposit': 30.00
         }
     }, {
         'Return': {
@@ -136,18 +136,18 @@ def test_revenue_example2(output):
             'Item': 'Grill',
             'Days Rented': 2,
             'Rent Total': 10.70,
-            'Replacement Fee': 0.00
+            'Replacement Deposit': 0.00
         }
     }, {
         'Rent': {
             'Name': 'Bob',
             'Item': 'Grill',
-            'Days Rented': 1,
+            'Days Rented': 0,
             'Rent Total': 5.35,
-            'Replacement Fee': 30.00
+            'Replacement Deposit': 30.00
         }
     }]
 
     revenue(transcations)
 
-    assert output == 'Revenue: $10.70'
+    assert output == 'Revenue: $21.40'

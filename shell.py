@@ -2,17 +2,19 @@ from disk import *
 from core import *
 
 
-def total(cart, inventory):
-    rent_fee = rental_fee(cart, inventory)
-    replacement_cost = replacement_fee(cart, inventory)
-    for item in cart:
+def rent_total(rent_cart, inventory):
+    rent_fee = rental_fee(rent_cart, inventory)
+    replacement_cost = replacement_deposit(rent_cart, inventory)
+    print('Rent')
+    for item in rent_cart:
         item_name = inventory[item]['Item']
         rental_rate = '{0:.2f}'.format(
             float(inventory[item]['Rental Rate']) * 1.07)
         replacement = '{0:.2f}'.format(
             float(inventory[item]['Replacement Value']) * .1)
-        print('Item: {}\n\tRental Rate: ${}\n\tReplacement Fee: ${}'.format(
-            item_name, rental_rate, replacement))
+        print(
+            'Item: {}\n\tRental Rate: ${}\n\tReplacement Deposit: ${}'.format(
+                item_name, rental_rate, replacement))
     print('Total: ${}'.format('{0:.2f}'.format(
         float(rent_fee + replacement_cost))))
 
@@ -30,25 +32,25 @@ def print_transcations(transcations):
     for transcation in transcations:
         for item, info in transcation.items():
             print(
-                "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Fee: ${}\n".
+                "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Deposit: ${}\n".
                 format(item, info['Name'], info['Item'], info['Days Rented'],
                        '{0:.2f}'.format(info['Rent Total']), '{0:.2f}'.format(
-                           info['Replacement Fee'])))
+                           info['Replacement Deposit'])))
 
 
 def revenue(transcations):
     revenue_total = 0
     for transcation in transcations:
         for item, info in transcation.items():
-            if item == 'Return':
-                revenue_total += info['Rent Total']
+            revenue_total += info['Rent Total']
     print('Revenue: ${0:.2f}'.format(revenue_total))
 
 
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
-    cart = []
+    rent_cart = []
+    return_cart = []
     user = ''
     while user != '3':
         user = input(
@@ -73,7 +75,7 @@ def main():
                     rent_item = input('\nWhat would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
-                        cart.append(rent_item)
+                        rent_cart.append(rent_item)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
