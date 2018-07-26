@@ -33,8 +33,8 @@ def return_fee(inv):
 def deposit_return(inv):
     total = 0
     for item, info in inv.items():
-        total += float(info['Replacement Deposited'])
-    return total
+        total += info['Replacement Deposited']
+    return round(total, 2)
 
 
 def return_listing(return_item, inventory, days):
