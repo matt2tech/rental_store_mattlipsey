@@ -5,18 +5,32 @@ from core import *
 def rent_total(rent_cart, inventory):
     rent_fee = rental_fee(rent_cart, inventory)
     replacement_cost = replacement_deposit(rent_cart, inventory)
-    print('Rent')
+    print('\nRent')
     for item in rent_cart:
         item_name = inventory[item]['Item']
-        rental_rate = '{0:.2f}'.format(
-            float(inventory[item]['Rental Rate']) * 1.07)
+        rental_rate = '{0:.2f}'.format(inventory[item]['Rental Rate'] * 1.07)
         replacement = '{0:.2f}'.format(
-            float(inventory[item]['Replacement Value']) * .1)
+            inventory[item]['Replacement Value'] * .1)
         print(
             'Item: {}\n\tRental Rate: ${}\n\tReplacement Deposit: ${}'.format(
                 item_name, rental_rate, replacement))
-    print('Total: ${}'.format('{0:.2f}'.format(
-        float(rent_fee + replacement_cost))))
+    print('Total: ${}'.format('{0:.2f}'.format(rent_fee + replacement_cost)))
+
+
+def return_total(return_cart, inventory, days):
+    rent_fee = return_fee(return_cart, inventory, days)
+    deposit_return = replacement_deposit(return_cart, inventory)
+    print('\nReturn')
+    for item in return_cart:
+        item_name = inventory[item]['Item']
+        rental_rate = '{0:.2f}'.format(inventory[item]['Rental Rate'] * 1.07)
+        replacement = '{0:.2f}'.format(
+            inventory[item]['Replacement Value'] * .1)
+        print(
+            'Item: {}\n\tDays Rented: {}\n\tRental Rate: ${}\n\tReplacement Deposit: ${}'.
+            format(item_name, days, rental_rate, replacement))
+    print('Total: ${0:.2f}\nDeposit Returned: ${1:.2f}'.format(
+        rent_fee, deposit_return))
 
 
 def print_inventory(inventory):
@@ -49,6 +63,7 @@ def revenue(transcations):
 def main():
     inventory = load_inventory()
     transcations = load_transcations()
+    print(transcations)
     rent_cart = []
     return_cart = []
     user = ''
@@ -68,6 +83,16 @@ def main():
                     return_item = input('\nWhat are you returning?\n>>> ')
                     if inventory.get(return_item, False):
                         returning(return_item, inventory)
+                        while True:
+                            days = input(
+                                '\nHow many days have you had this item?\n>>> '
+                            )
+                            if days.isdigit():
+                                days = int(days)
+                                return_cart.append(return_item)
+                                break
+                            else:
+                                print('Provide an appropriate number.')
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '2':
@@ -82,7 +107,8 @@ def main():
                     print('\nHere\'s your receipt')
                     print('-----------------------------')
                     print(name)
-                    total(cart, inventory)
+                    rent_total(rent_cart, inventory)
+                    return_total(return_cart, inventory, days)
                     exit()
                 elif option == '4':
                     exit()
