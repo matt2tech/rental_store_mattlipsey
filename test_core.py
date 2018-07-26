@@ -107,3 +107,50 @@ def test_return_fee():
     total = return_fee(inv)
 
     assert total == 16.05
+
+
+def test_deposit_return():
+    inv = {
+        'Grill': {
+            'Days Rented': 3,
+            'Rental Rate': 5.35,
+            'Replacement Deposited': 30.00
+        }
+    }
+
+    total = deposit_return(inv)
+
+    assert total == 30.00
+
+
+def test_return_listing():
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Flat Screen Television',
+            'Rental Rate': 7.50,
+            'Replacement Value': 500.00,
+            'In-Stock': 11
+        }
+    }
+
+    dictionary = return_listing('1', inv, 3)
+
+    assert dictionary == {
+        'Grill': {
+            'Days Rented': 3,
+            'Rental Rate': 5.35,
+            'Replacement Deposited': 30.00
+        }
+    }
