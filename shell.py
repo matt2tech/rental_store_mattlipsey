@@ -110,18 +110,20 @@ def main():
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    print('\nHere\'s your receipt')
-                    print('-----------------------------')
-                    print(name)
-                    rent_total(rent_cart, inventory)
-                    return_total(return_dict)
-                    update_stock(inventory)
-                    update_history(new_transcations)
-                    exit()
+                    if new_transcations == []:
+                        print('Leaving Matt\'s Rents...')
+                        exit()
+                    else:
+                        print('\nHere\'s your receipt')
+                        print('-----------------------------')
+                        print(name)
+                        rent_total(rent_cart, inventory)
+                        return_total(return_dict)
+                        update_stock(inventory)
+                        update_history(new_transcations)
+                        exit()
                 elif option == '4':
                     exit()
-                elif option == '':
-                    break
                 else:
                     print('Invalid option!')
         elif user == '2':
