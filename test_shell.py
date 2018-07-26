@@ -32,6 +32,7 @@ def test_rent_total(output):
     assert output == 'Rent\nItem: Grill\n\tRental Rate: $5.35\n\tReplacement Deposit: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Deposit: $300.00\nTotal: $356.75'
 
 
+
 @should_print
 def test_print_inventory(output):
     inv = {

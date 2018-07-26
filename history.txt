@@ -1,5 +1,5 @@
-customer's name,item,days,rent total,replacement fee
-Rent,Matt,Grill,1,5.35,30.00
+type,customer's name,item,days,rent total,replacement deposit
+Rent,Matt,Grill,0,5.35,30.00
 Return,Matt,Grill,2,10.70,0.00
-Rent,Bob,Grill,1,5.35,30.00
+Rent,Bob,Grill,0,5.35,30.00
 Return,Bob,Grill,2,10.70,0.00

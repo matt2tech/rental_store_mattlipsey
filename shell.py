@@ -25,8 +25,8 @@ def return_total(return_dict):
         for item, info in inv.items():
             item_name = item
             days = info['Days Rented']
-            rental = info['Rental Rate']
-            replace = info['Replacement Deposited']
+            rental = '{0:.2f}'.format(info['Rental Rate'])
+            replace = '{0:.2f}'.format(info['Replacement Deposited'])
             print(
                 'Item: {}\n\tDays Rented: {}\n\tRental Rate: ${}\n\tReplacement Deposited ${}'.
                 format(item_name, days, rental, replace))

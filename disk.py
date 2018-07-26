@@ -108,7 +108,6 @@ def add_rent(name, new_transcations, rent_item, inventory):
     item_name = inventory[rent_item]['Item']
     rent_total = round(inventory[rent_item]['Rental Rate'] * 1.07, 2)
     replace = round(inventory[rent_item]['Replacement Value'] * .1, 2)
-
     new_transcations.append({
         'Rent': {
             'Name': name,

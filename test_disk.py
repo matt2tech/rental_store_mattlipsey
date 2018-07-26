@@ -12,3 +12,6 @@ line
 '''})
 def test_inventory_contents():
     assert inventory_contents() == 'line\nline\nline\n'
+
+
+# def test_inventory_stock_conversion():
