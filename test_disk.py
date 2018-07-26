@@ -4,6 +4,11 @@ from bcca.test import (
     fake_file,
 )
 
-@should_print
-def test_inventory_to_string(output):
-    inv = 
+
+@fake_file({'inventory.txt': '''header line
+line
+line
+line
+'''})
+def test_inventory_contents():
+    assert inventory_contents() == 'line\nline\nline\n'
