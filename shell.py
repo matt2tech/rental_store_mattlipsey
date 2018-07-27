@@ -28,7 +28,7 @@ def return_total(return_dict):
             rental = '{0:.2f}'.format(info['Rental Rate'])
             replace = '{0:.2f}'.format(info['Replacement Deposited'])
             print(
-                'Item: {}\n\tDays Rented: {}\n\tRental Rate: ${}\n\tReplacement Deposited ${}'.
+                'Item: {}\n\tDays Rented: {}\n\tRental Rate: ${}\n\tReplacement Deposited: ${}'.
                 format(item_name, days, rental, replace))
         print('Total: ${0:.2f}\nDeposit Return: ${1:.2f}\n'.format(
             round(rent_fee, 2), round(deposit, 2)))

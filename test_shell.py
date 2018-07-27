@@ -32,6 +32,20 @@ def test_rent_total(output):
     assert output == 'Rent\nItem: Grill\n\tRental Rate: $5.35\n\tReplacement Deposit: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Deposit: $300.00\nTotal: $356.75'
 
 
+@should_print
+def test_return_total(output):
+    inv = [{
+        'Grill': {
+            'Days Rented': 3,
+            'Rental Rate': 3.21,
+            'Replacement Deposited': 8
+        }
+    }]
+
+    return_total(inv)
+
+    assert output == 'Return\nItem: Grill\n\tDays Rented: 3\n\tRental Rate: $3.21\n\tReplacement Deposited: $8.00\nTotal: $9.63\nDeposit Return: $8.00\n'
+
 
 @should_print
 def test_print_inventory(output):
