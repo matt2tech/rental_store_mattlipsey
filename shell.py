@@ -43,9 +43,9 @@ def print_inventory(inventory):
                     float(info['Replacement Value'])), info['In-Stock']))
 
 
-def print_transcations(transcations):
-    for transcation in transcations:
-        for item, info in transcation.items():
+def print_transactions(transactions):
+    for transaction in transactions:
+        for item, info in transaction.items():
             print(
                 "Type: {}\nName: {}\n\tItem: {}\n\tDays Rented: {}\n\tRent Total: ${}\n\tReplacement Deposit: ${}\n".
                 format(item, info['Name'], info['Item'], info['Days Rented'],
@@ -53,20 +53,20 @@ def print_transcations(transcations):
                            info['Replacement Deposit'])))
 
 
-def revenue(transcations):
+def revenue(transactions):
     revenue_total = 0
-    for transcation in transcations:
-        for item, info in transcation.items():
+    for transaction in transactions:
+        for item, info in transaction.items():
             revenue_total += info['Rent Total']
     print('Revenue: ${0:.2f}'.format(revenue_total))
 
 
 def main():
     inventory = load_inventory()
-    transcations = load_transcations()
+    transactions = load_transactions()
     rent_cart = []
     return_dict = []
-    new_transcations = []
+    new_transactions = []
     user = ''
     while user != '3':
         user = input(
@@ -93,7 +93,7 @@ def main():
                                 return_dict.append(
                                     return_listing(return_item, inventory,
                                                    days))
-                                add_return(name, new_transcations, return_item,
+                                add_return(name, new_transactions, return_item,
                                            inventory, days)
                                 break
                             else:
@@ -106,11 +106,11 @@ def main():
                     if inventory.get(rent_item, False):
                         renting(rent_item, inventory)
                         rent_cart.append(rent_item)
-                        add_rent(name, new_transcations, rent_item, inventory)
+                        add_rent(name, new_transactions, rent_item, inventory)
                     else:
                         print('Sorry, we do not carry that.')
                 elif option == '3':
-                    if new_transcations == []:
+                    if new_transactions == []:
                         print('Leaving Matt\'s Rents...')
                         exit()
                     else:
@@ -120,7 +120,7 @@ def main():
                         rent_total(rent_cart, inventory)
                         return_total(return_dict)
                         update_stock(inventory)
-                        update_history(new_transcations)
+                        update_history(new_transactions)
                         exit()
                 elif option == '4':
                     exit()
@@ -139,9 +139,9 @@ def main():
                         if employee_options == '1':
                             print_inventory(inventory)
                         elif employee_options == '2':
-                            print_transcations(transcations)
+                            print_transactions(transactions)
                         elif employee_options == '3':
-                            revenue(transcations)
+                            revenue(transactions)
                         elif employee_options == '4':
                             print('Leaving Matt\'s Rents...')
                             exit()

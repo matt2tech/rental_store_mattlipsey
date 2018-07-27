@@ -58,26 +58,26 @@ def update_stock(inventory):
 # History file conversion
 
 
-def transcations_contents():
+def transactions_contents():
     with open('history.txt', 'r') as file:
         file.readline()
         contents = file.read()
     return contents
 
 
-def transcations_stock_conversion(contents):
+def transactions_stock_conversion(contents):
     item = contents.split(',')
     return item[0], item[1], item[2], int(item[3]), item[4], item[5]
 
 
-def load_transcations():
-    contents = transcations_contents()
-    transcations = []
+def load_transactions():
+    contents = transactions_contents()
+    transactions = []
     lines = contents.split('\n')
     for line in lines:
         if line:
-            item = transcations_stock_conversion(line)
-            transcations.append({
+            item = transactions_stock_conversion(line)
+            transactions.append({
                 item[0]: {
                     'Name': item[1],
                     'Item': item[2],
@@ -87,13 +87,13 @@ def load_transcations():
                 }
             })
 
-    return transcations
+    return transactions
 
 
-def add_return(name, new_transcations, return_item, inventory, days):
+def add_return(name, new_transactions, return_item, inventory, days):
     item_name = inventory[return_item]['Item']
     rent_total = round(inventory[return_item]['Rental Rate'] * 1.07, 2)
-    new_transcations.append({
+    new_transactions.append({
         'Return': {
             'Name': name,
             'Item': item_name,
@@ -104,11 +104,11 @@ def add_return(name, new_transcations, return_item, inventory, days):
     })
 
 
-def add_rent(name, new_transcations, rent_item, inventory):
+def add_rent(name, new_transactions, rent_item, inventory):
     item_name = inventory[rent_item]['Item']
     rent_total = round(inventory[rent_item]['Rental Rate'] * 1.07, 2)
     replace = round(inventory[rent_item]['Replacement Value'] * .1, 2)
-    new_transcations.append({
+    new_transactions.append({
         'Rent': {
             'Name': name,
             'Item': item_name,
@@ -119,9 +119,9 @@ def add_rent(name, new_transcations, rent_item, inventory):
     })
 
 
-def transcations_to_string(new_transcations):
+def transactions_to_string(new_transactions):
     strings = []
-    for trans in new_transcations:
+    for trans in new_transactions:
         for type_sale, info in trans.items():
             name = info['Name']
             rental_item = info['Item']
@@ -133,11 +133,11 @@ def transcations_to_string(new_transcations):
                                                 round(replace, 2))
             strings.append(string)
         strings.sort()
-        transcation = '\n'.join(strings)
-    return transcation
+        transaction = '\n'.join(strings)
+    return transaction
 
 
-def update_history(new_transcations):
-    text = transcations_to_string(new_transcations)
+def update_history(new_transactions):
+    text = transactions_to_string(new_transactions)
     with open('history.txt', 'a') as file:
         file.write(text)

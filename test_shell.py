@@ -56,8 +56,8 @@ def test_print_inventory(output):
 
 
 @should_print
-def test_print_transcations(output):
-    transcations = [{
+def test_print_transactions(output):
+    transactions = [{
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
@@ -75,14 +75,14 @@ def test_print_transcations(output):
         }
     }]
 
-    print_transcations(transcations)
+    print_transactions(transactions)
 
     assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 0\n\tRent Total: $5.35\n\tReplacement Deposit: $30.00\n\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Deposit: $0.00\n'
 
 
 @should_print
 def test_revenue_example1(output):
-    transcations = [{
+    transactions = [{
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
@@ -116,14 +116,14 @@ def test_revenue_example1(output):
         }
     }]
 
-    revenue(transcations)
+    revenue(transactions)
 
     assert output == 'Revenue: $32.10'
 
 
 @should_print
 def test_revenue_example2(output):
-    transcations = [{
+    transactions = [{
         'Rent': {
             'Name': 'Matt',
             'Item': 'Grill',
@@ -149,6 +149,6 @@ def test_revenue_example2(output):
         }
     }]
 
-    revenue(transcations)
+    revenue(transactions)
 
     assert output == 'Revenue: $21.40'
