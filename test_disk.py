@@ -212,7 +212,7 @@ def transactions_to_string_example1(output):
 
 
 @should_print
-def transactions_to_string_example2(output):
+def transactions_to_string_example_2(output):
     inv = [{
         'Rent': {
             'Name': 'Matt',
