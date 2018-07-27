@@ -191,3 +191,40 @@ def test_add_return():
             'Replacement Deposit': 0.00
         }
     }]
+
+
+def test_add_rent():
+    new_transactions = []
+
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Flat Screen Television',
+            'Rental Rate': 7.50,
+            'Replacement Value': 500.00,
+            'In-Stock': 11
+        }
+    }
+
+    add_rent('Matt', new_transactions, '1', inv)
+
+    assert new_transactions == [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 0,
+            'Rent Total': 5.35,
+            'Replacement Deposit': 30
+        }
+    }]
