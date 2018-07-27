@@ -52,13 +52,13 @@ def return_listing(return_item, inventory, days):
 
 def add_return(name, new_transactions, return_item, inventory, days):
     item_name = inventory[return_item]['Item']
-    rent_total = round(inventory[return_item]['Rental Rate'] * 1.07, 2)
+    rent_total = inventory[return_item]['Rental Rate'] * 1.07
     new_transactions.append({
         'Return': {
             'Name': name,
             'Item': item_name,
             'Days Rented': days,
-            'Rent Total': (rent_total * days),
+            'Rent Total': round((rent_total * days), 2),
             'Replacement Deposit': 0.00
         }
     })
