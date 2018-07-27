@@ -69,3 +69,47 @@ def test_load_inventory_example2():
             'In-Stock': 11
         }
     }
+
+
+@should_print
+def test_inventory_to_string_example1(output):
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 3.0,
+            'Replacement Value': 80.0,
+            'In-Stock': 5
+        }
+    }
+
+    inventory = inventory_to_string(inv)
+
+    assert inventory == 'item number,item name,rental rate,replacement cost,stock\n1,Grill,3.0,80.0,5'
+
+
+@should_print
+def test_inventory_to_string_example2(output):
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 3.0,
+            'Replacement Value': 80.0,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 14.0,
+            'Replacement Value': 1500.0,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'High-Quality Tent',
+            'Rental Rate': 3.2,
+            'Replacement Value': 100.0,
+            'In-Stock': 11
+        }
+    }
+
+    inventory = inventory_to_string(inv)
+
+    assert inventory == 'item number,item name,rental rate,replacement cost,stock\n1,Grill,3.0,80.0,5\n2,Boat,14.0,1500.0,3\n3,High-Quality Tent,3.2,100.0,11'
