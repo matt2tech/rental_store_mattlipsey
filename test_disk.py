@@ -157,3 +157,11 @@ line
 '''})
 def test_transactions_contents():
     assert transactions_contents() == 'line\nline\nline\n'
+
+
+def test_transactions_stock_conversion():
+    contents = 'Return,Matt,Grill,3,16.05,8'
+
+    content = transactions_stock_conversion(contents)
+
+    assert content == ('Return', 'Matt', 'Grill', 3, '16.05', '8')
