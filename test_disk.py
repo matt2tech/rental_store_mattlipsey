@@ -194,3 +194,42 @@ def test_load_transactions():
             'Replacement Deposit': 8.0
         }
     }]
+
+
+@should_print
+def transactions_to_string_example1(output):
+    inv = [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 0,
+            'Rent Total': 5.35,
+            'Replacement Deposit': 8.0
+        }
+    }]
+
+    assert inv == '''Rent,Matt,Grill,0,5.35,8.0'''
+
+
+@should_print
+def transactions_to_string_example2(output):
+    inv = [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 0,
+            'Rent Total': 5.35,
+            'Replacement Deposit': 8.0
+        }
+    }, {
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 3,
+            'Rent Total': 16.05,
+            'Replacement Deposit': 8.0
+        }
+    }]
+
+    assert inv == '''Rent,Matt,Grill,0,5.35,8.0
+Return,Matt,Grill,3,16.05,8.0'''
