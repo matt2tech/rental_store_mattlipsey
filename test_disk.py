@@ -15,9 +15,57 @@ def test_inventory_contents():
 
 
 def test_inventory_stock_conversion():
-
     contents = '1,Grill,3.0,80.0,5'
 
     content = inventory_stock_conversion(contents)
 
     assert content == ('1', 'Grill', '3.0', '80.0', 5)
+
+
+@fake_file({'inventory.txt': '''header line
+1,Grill,3,80,5
+'''})
+def test_load_inventory_example1():
+    inv = load_inventory()
+
+    assert inv == {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 3.0,
+            'Replacement Value': 80.0,
+            'In-Stock': 5
+        }
+    }
+
+
+@fake_file({
+    'inventory.txt':
+    '''header line
+1,Grill,3,80,5
+2,Boat,14,1500,3
+3,Tent,3.2,100,11
+'''
+})
+def test_load_inventory_example2():
+    inv = load_inventory()
+
+    assert inv == {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 3.0,
+            'Replacement Value': 80.0,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 14.0,
+            'Replacement Value': 1500.0,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Tent',
+            'Rental Rate': 3.2,
+            'Replacement Value': 100.0,
+            'In-Stock': 11
+        }
+    }
