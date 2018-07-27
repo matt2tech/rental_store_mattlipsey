@@ -112,4 +112,50 @@ def test_inventory_to_string_example2(output):
 
     inventory = inventory_to_string(inv)
 
-    assert inventory == 'item number,item name,rental rate,replacement cost,stock\n1,Grill,3.0,80.0,5\n2,Boat,14.0,1500.0,3\n3,High-Quality Tent,3.2,100.0,11'
+    assert inventory == '''item number,item name,rental rate,replacement cost,stock
+1,Grill,3.0,80.0,5
+2,Boat,14.0,1500.0,3
+3,High-Quality Tent,3.2,100.0,11'''
+
+
+# @fake_file({'inventory.txt': ''})
+# def test__foo():
+# inventory = {}
+#
+# update_stock(inventory)
+#
+# assert open('inventory.txt').read() == '''first line
+# second line
+# '''
+
+
+@fake_file({'inventory.txt': ''})
+def test_update_stock():
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 3.0,
+            'Replacement Value': 80.0,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 14.0,
+            'Replacement Value': 1500.0,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'High-Quality Tent',
+            'Rental Rate': 3.2,
+            'Replacement Value': 100.0,
+            'In-Stock': 11
+        }
+    }
+
+    update_stock(inv)
+
+    assert open('inventory.txt').read(
+    ) == '''item number,item name,rental rate,replacement cost,stock
+1,Grill,3.0,80.0,5
+2,Boat,14.0,1500.0,3
+3,High-Quality Tent,3.2,100.0,11'''
