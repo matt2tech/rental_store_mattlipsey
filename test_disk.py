@@ -212,7 +212,7 @@ def transactions_to_string_example1(output):
 
 
 @should_print
-def transactions_to_string_example_2(output):
+def transactions_to_string_example2(output):
     inv = [{
         'Rent': {
             'Name': 'Matt',
@@ -232,4 +232,35 @@ def transactions_to_string_example_2(output):
     }]
 
     assert inv == '''Rent,Matt,Grill,0,5.35,8.0
+Return,Matt,Grill,3,16.05,8.0'''
+
+
+@fake_file({
+    'history.txt':
+    'type,customer\'s name,item,days,rent total,replacement deposit\n'
+})
+def test_update_history():
+    inv = [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 0,
+            'Rent Total': 5.35,
+            'Replacement Deposit': 8.0
+        }
+    }, {
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 3,
+            'Rent Total': 16.05,
+            'Replacement Deposit': 8.0
+        }
+    }]
+
+    update_history(inv)
+
+    assert open('history.txt').read(
+    ) == '''type,customer\'s name,item,days,rent total,replacement deposit
+Rent,Matt,Grill,0,5.35,8.0
 Return,Matt,Grill,3,16.05,8.0'''
