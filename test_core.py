@@ -154,3 +154,40 @@ def test_return_listing():
             'Replacement Deposited': 30.00
         }
     }
+
+
+def test_add_return():
+    new_transactions = []
+
+    inv = {
+        '1': {
+            'Item': 'Grill',
+            'Rental Rate': 5.00,
+            'Replacement Value': 300.00,
+            'In-Stock': 5
+        },
+        '2': {
+            'Item': 'Boat',
+            'Rental Rate': 20.00,
+            'Replacement Value': 3000.00,
+            'In-Stock': 3
+        },
+        '3': {
+            'Item': 'Flat Screen Television',
+            'Rental Rate': 7.50,
+            'Replacement Value': 500.00,
+            'In-Stock': 11
+        }
+    }
+
+    add_return('Matt', new_transactions, '1', inv, 3)
+
+    assert new_transactions == [{
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 3,
+            'Rent Total': 16.05,
+            'Replacement Deposit': 0.00
+        }
+    }]
