@@ -29,7 +29,14 @@ def test_rent_total(output):
 
     rent_total(cart, inv)
 
-    assert output == 'Rent\nItem: Grill\n\tRental Rate: $5.35\n\tReplacement Deposit: $30.00\nItem: Boat\n\tRental Rate: $21.40\n\tReplacement Deposit: $300.00\nTotal: $356.75'
+    assert output == '''Rent
+Item: Grill
+\tRental Rate: $5.35
+\tReplacement Deposit: $30.00
+Item: Boat
+\tRental Rate: $21.40
+\tReplacement Deposit: $300.00
+Total: $356.75'''
 
 
 @should_print
@@ -44,7 +51,14 @@ def test_return_total(output):
 
     return_total(inv)
 
-    assert output == 'Return\nItem: Grill\n\tDays Rented: 3\n\tRental Rate: $3.21\n\tReplacement Deposited: $8.00\nTotal: $9.63\nDeposit Return: $8.00\n'
+    assert output == '''Return
+Item: Grill
+\tDays Rented: 3
+\tRental Rate: $3.21
+\tReplacement Deposited: $8.00
+Total: $9.63
+Deposit Return: $8.00
+'''
 
 
 @should_print
@@ -66,7 +80,17 @@ def test_print_inventory(output):
 
     print_inventory(inv)
 
-    assert output == '''Item Number: 1\n\tItem: Grill\n\tRental Rate: $5.00\n\tReplacement Value: $300.00\n\tIn-Stock: 5\n\nItem Number: 2\n\tItem: Boat\n\tRental Rate: $20.00\n\tReplacement Value: $3000.00\n\tIn-Stock: 3'''
+    assert output == '''Item Number: 1
+\tItem: Grill
+\tRental Rate: $5.00
+\tReplacement Value: $300.00
+\tIn-Stock: 5
+
+Item Number: 2
+\tItem: Boat
+\tRental Rate: $20.00
+\tReplacement Value: $3000.00
+\tIn-Stock: 3'''
 
 
 @should_print
@@ -91,7 +115,20 @@ def test_print_transactions(output):
 
     print_transactions(transactions)
 
-    assert output == 'Type: Rent\nName: Matt\n\tItem: Grill\n\tDays Rented: 0\n\tRent Total: $5.35\n\tReplacement Deposit: $30.00\n\nType: Return\nName: Matt\n\tItem: Grill\n\tDays Rented: 2\n\tRent Total: $10.70\n\tReplacement Deposit: $0.00\n'
+    assert output == '''Type: Rent
+Name: Matt
+\tItem: Grill
+\tDays Rented: 0
+\tRent Total: $5.35
+\tReplacement Deposit: $30.00
+
+Type: Return
+Name: Matt
+\tItem: Grill
+\tDays Rented: 2
+\tRent Total: $10.70
+\tReplacement Deposit: $0.00
+'''
 
 
 @should_print
