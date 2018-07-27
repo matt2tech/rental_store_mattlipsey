@@ -197,7 +197,7 @@ def test_load_transactions():
 
 
 @should_print
-def transactions_to_string_example1(output):
+def test_transactions_to_string_example1(output):
     inv = [{
         'Rent': {
             'Name': 'Matt',
@@ -208,11 +208,13 @@ def transactions_to_string_example1(output):
         }
     }]
 
-    assert inv == '''Rent,Matt,Grill,0,5.35,8.0'''
+    string = transactions_to_string(inv)
+
+    assert string == '''Rent,Matt,Grill,0,5.35,8.0'''
 
 
 @should_print
-def transactions_to_string_example2(output):
+def test_transactions_to_string_example2(output):
     inv = [{
         'Rent': {
             'Name': 'Matt',
@@ -231,7 +233,9 @@ def transactions_to_string_example2(output):
         }
     }]
 
-    assert inv == '''Rent,Matt,Grill,0,5.35,8.0
+    string = transactions_to_string(inv)
+
+    assert string == '''Rent,Matt,Grill,0,5.35,8.0
 Return,Matt,Grill,3,16.05,8.0'''
 
 
