@@ -118,17 +118,6 @@ def test_inventory_to_string_example2(output):
 3,High-Quality Tent,3.2,100.0,11'''
 
 
-# @fake_file({'inventory.txt': ''})
-# def test__foo():
-# inventory = {}
-#
-# update_stock(inventory)
-#
-# assert open('inventory.txt').read() == '''first line
-# second line
-# '''
-
-
 @fake_file({'inventory.txt': ''})
 def test_update_stock():
     inv = {
@@ -159,3 +148,12 @@ def test_update_stock():
 1,Grill,3.0,80.0,5
 2,Boat,14.0,1500.0,3
 3,High-Quality Tent,3.2,100.0,11'''
+
+
+@fake_file({'history.txt': '''header line
+line
+line
+line
+'''})
+def test_transactions_contents():
+    assert transactions_contents() == 'line\nline\nline\n'
