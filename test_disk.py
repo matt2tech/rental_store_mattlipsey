@@ -165,3 +165,32 @@ def test_transactions_stock_conversion():
     content = transactions_stock_conversion(contents)
 
     assert content == ('Return', 'Matt', 'Grill', 3, '16.05', '8')
+
+
+@fake_file({
+    'history.txt':
+    '''header
+Rent,Matt,Grill,0,5.35,8
+Return,Matt,Grill,3,16.05,8
+'''
+})
+def test_load_transactions():
+    inv = load_transactions()
+
+    assert inv == [{
+        'Rent': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 0,
+            'Rent Total': 5.35,
+            'Replacement Deposit': 8.0
+        }
+    }, {
+        'Return': {
+            'Name': 'Matt',
+            'Item': 'Grill',
+            'Days Rented': 3,
+            'Rent Total': 16.05,
+            'Replacement Deposit': 8.0
+        }
+    }]
