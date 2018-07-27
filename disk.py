@@ -12,7 +12,7 @@ def inventory_contents():
 
 def inventory_stock_conversion(contents):
     item = contents.split(',')
-    return (item[0]), item[1], item[2], item[3], int(item[4])
+    return item[0], item[1], item[2], item[3], int(item[4])
 
 
 def load_inventory():
@@ -88,35 +88,6 @@ def load_transactions():
             })
 
     return transactions
-
-
-def add_return(name, new_transactions, return_item, inventory, days):
-    item_name = inventory[return_item]['Item']
-    rent_total = round(inventory[return_item]['Rental Rate'] * 1.07, 2)
-    new_transactions.append({
-        'Return': {
-            'Name': name,
-            'Item': item_name,
-            'Days Rented': days,
-            'Rent Total': (rent_total * days),
-            'Replacement Deposit': 0.00
-        }
-    })
-
-
-def add_rent(name, new_transactions, rent_item, inventory):
-    item_name = inventory[rent_item]['Item']
-    rent_total = round(inventory[rent_item]['Rental Rate'] * 1.07, 2)
-    replace = round(inventory[rent_item]['Replacement Value'] * .1, 2)
-    new_transactions.append({
-        'Rent': {
-            'Name': name,
-            'Item': item_name,
-            'Days Rented': 0,
-            'Rent Total': rent_total,
-            'Replacement Deposit': replace
-        }
-    })
 
 
 def transactions_to_string(new_transactions):
