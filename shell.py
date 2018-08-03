@@ -127,30 +127,22 @@ def main():
                 else:
                     print('Invalid option!')
         elif user == '2':
-            password = ' '
-            while password != '':
-                password = input('\nInput the store\'s password\n>>> ')
-                if password == '1953':
-                    employee_options = ''
-                    while employee_options != '4':
-                        employee_options = input(
-                            '\nWhat would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Quit\n>>> '
-                        )
-                        if employee_options == '1':
-                            print_inventory(inventory)
-                        elif employee_options == '2':
-                            print_transactions(transactions)
-                        elif employee_options == '3':
-                            revenue(transactions)
-                        elif employee_options == '4':
-                            print('Leaving Matt\'s Rents...')
-                            exit()
-                        else:
-                            print('Invalid option!')
-                elif password == '':
-                    print('Returning to previous menu...')
+            employee_options = ''
+            while employee_options != '4':
+                employee_options = input(
+                    '\nWhat would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Quit\n>>> '
+                )
+                if employee_options == '1':
+                    print_inventory(inventory)
+                elif employee_options == '2':
+                    print_transactions(transactions)
+                elif employee_options == '3':
+                    revenue(transactions)
+                elif employee_options == '4':
+                    print('Leaving Matt\'s Rents...')
+                    exit()
                 else:
-                    print('Invalid Password!')
+                    print('Invalid option!')
         elif user == '3':
             print('Leaving Matt\'s Rents...')
         else:
