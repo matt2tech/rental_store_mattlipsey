@@ -111,7 +111,9 @@ def main():
                         rent_cart.append(rent_item)
                         add_rent(name, new_transactions, rent_item, inventory)
                     else:
-                        print('Sorry, we do not carry that.')
+                        print(
+                            'Sorry, we do not carry that, or we\'re out of stock.'
+                        )
                 elif option == '3':
                     if new_transactions == []:
                         print('Leaving Matt\'s Rents...')
@@ -153,12 +155,12 @@ def main():
                     print('Leaving Matt\'s Rents...')
                     exit()
                 else:
-                    print('Invalid option!')
+                    print('Please input number associated with desired option')
         elif user == '2':
             employee_options = ''
-            while employee_options != '4':
+            while employee_options != '5':
                 employee_options = input(
-                    '\nWhat would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Quit\n>>> '
+                    '\nWhat would you like to review?\n1 - Stock\n2 - Transcation History\n3 - Revenue\n4 - Help\n5 - Quit\n>>> '
                 )
                 if employee_options == '1':
                     print_inventory(inventory)
@@ -167,10 +169,29 @@ def main():
                 elif employee_options == '3':
                     revenue(transactions)
                 elif employee_options == '4':
+                    print('''
+"Stock"
+    Employee can review information on
+    items in stock, such as item\'s
+    number, item\'s name, rental rate,
+    replacement value, stock quantity.
+"Transaction History"
+    Employee can review information on
+    previous transactions, such as the
+    customer's name, item, days, rental
+    rate, total rent charge, replacement
+    deposit, and if the item was rented
+    or returned.
+"Revenue"
+    Employee can review the total amount
+    of money the store has made.
+"Quit"
+    Quit will close application.''')
+                elif employee_options == '5':
                     print('Leaving Matt\'s Rents...')
                     exit()
                 else:
-                    print('Invalid option!')
+                    print('Please input number associated with desired option')
         elif user == '3':
             print('''
 "Customer"
@@ -186,7 +207,7 @@ def main():
         elif user == '4':
             print('Leaving Matt\'s Rents...')
         else:
-            print('Invalid option!')
+            print('Please input number associated with desired option')
 
 
 if __name__ == '__main__':
