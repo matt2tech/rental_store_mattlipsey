@@ -78,9 +78,9 @@ def main():
         if user == '1':
             name = input('\nWhat is the name of this order?\n>>> ')
             option = ''
-            while option != '4':
+            while option != '5':
                 option = input(
-                    '\nAre you returning or renting?\n1 - Return\n2 - Rent\n3 - Done\n4 - Quit\n>>> '
+                    '\nAre you returning or renting?\n1 - Return\n2 - Rent\n3 - Done\n4 - Help\n5 - Quit\n>>> '
                 )
                 if option == '1':
                     print_inventory(inventory)
@@ -126,6 +126,31 @@ def main():
                         update_history(new_transactions)
                         exit()
                 elif option == '4':
+                    print('''
+"Return"
+    Customers can return a rented item here.
+    Customer will be asked what the item was and
+    many days he/she has had said item.  Customer
+    will be charged based on days and rental
+    rate of item.
+"Rent"
+    Customers can rent an item here.  Customer
+    will be asked what item he/she will be
+    renting.  Customer will be charged an
+    initial rental rate and will be required
+    to put down a replacement deposit of ten
+    percent of the item's replacement value.
+"Done"
+    The order will be confirmed here.  The
+    customer will receive a receipt with
+    his/her total charge.  Customers will
+    receive his/her replacement deposit 
+    upon returns here.  If no order was
+    placed, customer will close application.
+"Quit"
+    Quit will close application.''')
+                elif option == '5':
+                    print('Leaving Matt\'s Rents...')
                     exit()
                 else:
                     print('Invalid option!')
@@ -149,11 +174,15 @@ def main():
         elif user == '3':
             print('''
 "Customer"
-    Customer will take the user to the customer menu.  
-    The user can build his/her order and confirm it here.
+    Customer will take the user to the customer
+    menu.  The user can build his/her order and
+    confirm it here.
 "Employee"
-    Employee will take the user to the employee menu.
-    The user can review stock, transactions, and revenue here.''')
+    Employee will take the user to the employee
+    menu.  The user can review stock, transactions,
+    and revenue here.
+"Quit"
+    Quit will close application.''')
         elif user == '4':
             print('Leaving Matt\'s Rents...')
         else:
