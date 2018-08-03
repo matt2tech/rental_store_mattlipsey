@@ -1,6 +1,8 @@
 from disk import *
 from core import *
 
+# should add a help feature for customers and possibly employees
+
 
 def rent_total(rent_cart, inventory):
     rent_fee = rental_fee(rent_cart, inventory)
@@ -67,10 +69,11 @@ def main():
     rent_cart = []
     return_dict = []
     new_transactions = []
+    print('\nWelcome to Matt\'s Rents.')
     user = ''
-    while user != '3':
+    while user != '4':
         user = input(
-            '\nWelcome to Matt\'s Rents.\nAre you a customer or an employee?\n1 - Customer\n2 - Employee\n3 - Quit\n>>> '
+            '\nAre you a customer or an employee?\n1 - Customer\n2 - Employee\n3 - Help\n4 - Quit\n>>> '
         )
         if user == '1':
             name = input('\nWhat is the name of this order?\n>>> ')
@@ -144,6 +147,14 @@ def main():
                 else:
                     print('Invalid option!')
         elif user == '3':
+            print('''
+"Customer"
+    Customer will take the user to the customer menu.  
+    The user can build his/her order and confirm it here.
+"Employee"
+    Employee will take the user to the employee menu.
+    The user can review stock, transactions, and revenue here.''')
+        elif user == '4':
             print('Leaving Matt\'s Rents...')
         else:
             print('Invalid option!')
