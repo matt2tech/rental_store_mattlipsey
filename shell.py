@@ -1,8 +1,6 @@
 from disk import *
 from core import *
 
-# should add a help feature for customers and possibly employees
-
 
 def rent_total(rent_cart, inventory):
     rent_fee = rental_fee(rent_cart, inventory)
