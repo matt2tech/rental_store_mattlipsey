@@ -1,10 +1,10 @@
 from disk import *
-from core import *
+import core
 
 
 def rent_total(rent_cart, inventory):
-    rent_fee = rental_fee(rent_cart, inventory)
-    replacement_cost = replacement_deposit(rent_cart, inventory)
+    rent_fee = core.rental_fee(rent_cart, inventory)
+    replacement_cost = core.replacement_deposit(rent_cart, inventory)
     print('\nRent')
     for item in rent_cart:
         item_name = inventory[item]['Item']
@@ -20,8 +20,8 @@ def rent_total(rent_cart, inventory):
 def return_total(return_dict):
     print('Return')
     for inv in return_dict:
-        rent_fee = return_fee(inv)
-        deposit = deposit_return(inv)
+        rent_fee = core.return_fee(inv)
+        deposit = core.deposit_return(inv)
         for item, info in inv.items():
             item_name = item
             days = info['Days Rented']
@@ -84,7 +84,7 @@ def main():
                     print_inventory(inventory)
                     return_item = input('\nWhat are you returning?\n>>> ')
                     if inventory.get(return_item, False):
-                        returning(return_item, inventory)
+                        core.returning(return_item, inventory)
                         while True:
                             days = input(
                                 '\nHow many days have you had this item?\n>>> '
@@ -92,10 +92,10 @@ def main():
                             if days.isdigit():
                                 days = int(days)
                                 return_dict.append(
-                                    return_listing(return_item, inventory,
-                                                   days))
-                                add_return(name, new_transactions, return_item,
-                                           inventory, days)
+                                    core.return_listing(
+                                        return_item, inventory, days))
+                                core.add_return(name, new_transactions,
+                                                return_item, inventory, days)
                                 break
                             else:
                                 print('Provide an appropriate number.')
@@ -105,9 +105,10 @@ def main():
                     print_inventory(inventory)
                     rent_item = input('\nWhat would you like to rent?\n>>> ')
                     if inventory.get(rent_item, False):
-                        renting(rent_item, inventory)
+                        core.renting(rent_item, inventory)
                         rent_cart.append(rent_item)
-                        add_rent(name, new_transactions, rent_item, inventory)
+                        core.add_rent(name, new_transactions, rent_item,
+                                      inventory)
                     else:
                         print(
                             'Sorry, we do not carry that, or we\'re out of stock.'
