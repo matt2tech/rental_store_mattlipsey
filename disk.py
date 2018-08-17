@@ -99,12 +99,12 @@ def transactions_to_string(new_transactions):
             days = info['Days Rented']
             rent_total = info['Rent Total']
             replace = info['Replacement Deposit']
-            string = '{},{},{},{},{},{}'.format(type_sale, name, rental_item,
+            string = '{},{},{},{},{},{}\n'.format(type_sale, name, rental_item,
                                                 days, round(rent_total, 2),
                                                 round(replace, 2))
             strings.append(string)
         strings.sort()
-        transaction = '\n'.join(strings)
+        transaction = ''.join(strings)
     return transaction
 
 
