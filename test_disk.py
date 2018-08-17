@@ -210,7 +210,8 @@ def test_transactions_to_string_example1(output):
 
     string = transactions_to_string(inv)
 
-    assert string == '''Rent,Matt,Grill,0,5.35,8.0'''
+    assert string == '''Rent,Matt,Grill,0,5.35,8.0
+'''
 
 
 @should_print
@@ -236,7 +237,8 @@ def test_transactions_to_string_example2(output):
     string = transactions_to_string(inv)
 
     assert string == '''Rent,Matt,Grill,0,5.35,8.0
-Return,Matt,Grill,3,16.05,8.0'''
+Return,Matt,Grill,3,16.05,8.0
+'''
 
 
 @fake_file({
@@ -267,4 +269,5 @@ def test_update_history():
     assert open('history.txt').read(
     ) == '''type,customer\'s name,item,days,rent total,replacement deposit
 Rent,Matt,Grill,0,5.35,8.0
-Return,Matt,Grill,3,16.05,8.0'''
+Return,Matt,Grill,3,16.05,8.0
+'''
